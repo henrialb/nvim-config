@@ -86,6 +86,7 @@ require("mason-lspconfig").setup({
     "lua_ls",
     "eslint",
     "ruby_lsp",
+    "tailwindcss",
   },
   handlers = {
     lsp_zero.default_setup,
