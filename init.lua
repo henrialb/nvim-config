@@ -1,5 +1,6 @@
 -- Load my personal keymaps
 require("rikas.keymaps")
+require("h.keymaps")
 
 -- Load my vim options
 require("rikas.options")
@@ -48,7 +49,7 @@ require("rikas.misc")
 -- Autocomplete setup
 require("rikas.cmp")
 
--- Custom hilight groups
+-- Custom highlight groups
 require("rikas.highlights")
 
 require("rikas.lsp")
