@@ -52,4 +52,5 @@ require("rikas.cmp")
 -- Custom highlight groups
 require("rikas.highlights")
 
-require("rikas.lsp")
+require("h.lsp")
+require("h.autocommands")
