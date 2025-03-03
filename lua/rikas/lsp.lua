@@ -82,11 +82,10 @@ end
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "tsserver",
+    "ts_ls",
     "lua_ls",
     "eslint",
     "ruby_lsp",
-    "tailwindcss",
   },
   handlers = {
     lsp_zero.default_setup,
@@ -96,8 +95,8 @@ require("mason-lspconfig").setup({
       require("lspconfig").lua_ls.setup(lua_opts)
     end,
 
-    tsserver = function()
-      require("lspconfig").tsserver.setup({
+    ts_ls = function()
+      require("lspconfig").ts_ls.setup({
         init_options = {
           preferences = {
             disableSuggestions = true,
