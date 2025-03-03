@@ -3,13 +3,13 @@ return {
   opts = {
     event = { "BufReadPre", "BufNewFile" },
     formatters_by_ft = {
-      javascript = { { "prettierd", "biome" } },
-      typescript = { { "prettierd", "biome" } },
-      typescriptreact = { { "prettierd", "biome" } },
-      javascriptreact = { { "prettierd", "biome" } },
-      json = { "prettierd" },
+      javascript = { "biome", "prettierd" },
+      typescript = { "biome", "prettierd" },
+      typescriptreact = { "biome", "prettierd" },
+      javascriptreact = { "biome", "prettierd" },
+      json = { "biome", "prettierd" },
       html = { "prettierd" },
-      css = { "prettierd" },
+      css = { "biome", "prettierd" },
       scss = { "prettierd" },
       markdown = { "prettierd" },
       yaml = { "yamlfix" },
@@ -17,7 +17,7 @@ return {
       bash = { "shfmt" },
       sh = { "shfmt" },
       python = { "black" },
-      graphql = { "prettierd" },
+      graphql = { "biome", "prettierd" },
       eruby = { "erb_format" },
     },
 
@@ -37,5 +37,7 @@ return {
       async = false,
       timeout_ms = 1000,
     },
+
+    stop_after_first = true,
   },
 }
