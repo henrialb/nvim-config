@@ -44,3 +44,18 @@ vim.keymap.set(
 -- Use Enter to add new lines above and below
 vim.keymap.set("n", "<CR>", "m`o<Esc>``")
 vim.keymap.set("n", "<S-CR>", "m`O<Esc>``")
+
+-- Diganostics
+vim.keymap.set(
+  "n",
+  "<leader>cd",
+  "<cmd>lua vim.diagnostic.open_float()<cr>",
+  { desc = "Open diagnostics" }
+)
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
+vim.keymap.set(
+  "n",
+  "]d",
+  "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+  { desc = "Previous diagnostic" }
+)
