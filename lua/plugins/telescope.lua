@@ -11,6 +11,8 @@ return {
       "nvim-telescope/telescope-symbols.nvim",
     },
     config = function()
+      local actions = require("telescope.actions")
+      local telescope = require("telescope.builtin")
       require("telescope").setup({
         defaults = {
           mappings = {
