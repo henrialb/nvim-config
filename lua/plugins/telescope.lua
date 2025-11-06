@@ -17,7 +17,7 @@ return {
         defaults = {
           mappings = {
             i = {
-              ["<esc>"] = require("telescope.actions").close,
+              ["<esc>"] = actions.close,
             },
           },
           cache_picker = {
@@ -68,7 +68,6 @@ return {
       require("telescope").load_extension("harpoon")
       require("telescope").load_extension("fzf")
 
-      local telescope = require("telescope.builtin")
       vim.keymap.set("n", "<leader><leader>", function()
         telescope.find_files()
       end, { desc = "Find file" })
