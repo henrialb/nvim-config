@@ -18,7 +18,7 @@ require("mason-lspconfig").setup({
   },
   handlers = {
     -- Setup language servers
-    require("lspconfig").biome.setup({}),
+    vim.lsp.config.biome.setup({}),
     require("lspconfig").eslint.setup({}),
     require("lspconfig").jsonls.setup({}),
     require("lspconfig").cssls.setup({}),
