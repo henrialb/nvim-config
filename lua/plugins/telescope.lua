@@ -67,6 +67,10 @@ return {
       require("telescope").load_extension("fzf")
 
       local telescope = require("telescope.builtin")
+      vim.keymap.set("n", "<leader><leader>", function()
+        telescope.find_files()
+      end, { desc = "Find file" })
+
       vim.keymap.set("n", "<leader>ff", function()
         telescope.find_files()
       end, { desc = "Find file" })
