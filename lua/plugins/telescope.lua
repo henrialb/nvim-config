@@ -68,41 +68,21 @@ return {
       require("telescope").load_extension("harpoon")
       require("telescope").load_extension("fzf")
 
-      vim.keymap.set("n", "<leader><leader>", function()
-        telescope.find_files()
-      end, { desc = "Find file" })
-
-      vim.keymap.set("n", "<leader>ff", function()
-        telescope.find_files()
-      end, { desc = "Find file" })
-
-      vim.keymap.set("n", "<leader>fg", function()
-        telescope.live_grep()
-      end, { desc = "Grep in files" })
-
-      vim.keymap.set("n", "<leader>fb", function()
-        telescope.buffers()
-      end, { desc = "Find buffer" })
-
-      vim.keymap.set("n", "<leader>fh", function()
-        telescope.help_tags()
-      end, { desc = "Find help" })
-
-      vim.keymap.set("n", "<leader>fr", function()
-        telescope.oldfiles()
-      end, { desc = "Find recent files" })
-
-      vim.keymap.set("n", "<leader>fs", function()
-        telescope.lsp_document_symbols()
-      end, { desc = "Find symbols" })
-
-      vim.keymap.set("n", "<leader>fw", function()
-        telescope.grep_string()
-      end, { desc = "Find word under cursor" })
-
-      vim.keymap.set("n", "<leader>fd", function()
-        telescope.diagnostics({ severity_bound = 0 })
-      end, { desc = "Find diagnostics" })
+      vim.keymap.set("n", "<leader><leader>", telescope.find_files, { desc = "Find files" })
+      vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find files" })
+      vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Find in files (grep)" })
+      vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffer" })
+      vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Find help" })
+      vim.keymap.set("n", "<leader>fr", telescope.oldfiles, { desc = "Find recent files" })
+      vim.keymap.set("n", "<leader>fs", telescope.lsp_document_symbols, { desc = "Find symbols" })
+      vim.keymap.set("n", "<leader>fw", telescope.grep_string, { desc = "Find word under cursor" })
+      vim.keymap.set("n", "<leader>fl", telescope.resume, { desc = "Resume last find" })
+      vim.keymap.set(
+        "n",
+        "<leader>fd",
+        telescope.diagnostics({ severity_bound = 0 }),
+        { desc = "Find diagnostics" }
+      )
     end,
   },
 }
