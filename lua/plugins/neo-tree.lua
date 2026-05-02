@@ -89,6 +89,7 @@ return {
 
   config = function(_, opts)
     require("neo-tree").setup(opts)
+
     -- Toggle neo tree
     vim.keymap.set("n", "<leader>ee", function()
       require("neo-tree.command").execute({ toggle = true })

@@ -18,7 +18,12 @@ return {
           mappings = {
             i = {
               ["<esc>"] = actions.close,
+              ["C-q"] = actions.smart_send_to_qflist + actions.open_qflist,
             },
+          },
+          -- TODO: remove when Neovim fixes the Treesitter highlighter bug (nvim 0.12.1)
+          preview = {
+            treesitter = false,
           },
           cache_picker = {
             num_pickers = 100,
@@ -77,12 +82,9 @@ return {
       vim.keymap.set("n", "<leader>fs", telescope.lsp_document_symbols, { desc = "Find symbols" })
       vim.keymap.set("n", "<leader>fw", telescope.grep_string, { desc = "Find word under cursor" })
       vim.keymap.set("n", "<leader>fl", telescope.resume, { desc = "Resume last find" })
-      vim.keymap.set(
-        "n",
-        "<leader>fd",
-        telescope.diagnostics({ severity_bound = 0 }),
-        { desc = "Find diagnostics" }
-      )
+      vim.keymap.set("n", "<leader>fd", function()
+        telescope.diagnostics({ severity_bound = 0 })
+      end, { desc = "Find diagnostics" })
     end,
   },
 }

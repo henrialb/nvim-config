@@ -1,0 +1,93 @@
+-- You need to install the language server to use this config.
+-- npm i -g vscode-langservers-extracted (or use Mason: eslint-lsp)
+
+---@type vim.lsp.Config
+return {
+  -- cmd = { "vscode-eslint-language-server", "--stdio" },
+  cmd = { "eslint_d", "--stdio" },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "vue",
+    "svelte",
+    "astro",
+  },
+  root_dir = function(bufnr, on_dir)
+    local markers = {
+      ".eslintrc",
+      ".eslintrc.js",
+      ".eslintrc.cjs",
+      ".eslintrc.yaml",
+      ".eslintrc.yml",
+      ".eslintrc.json",
+      "eslint.config.js",
+      "eslint.config.mjs",
+      "eslint.config.cjs",
+      "eslint.config.ts",
+      "eslint.config.mts",
+      "eslint.config.cts",
+    }
+    local root = vim.fs.root(bufnr, markers)
+    if not root then
+      return
+    end
+    -- Only start if eslint is installed as a project dependency
+    if vim.fn.filereadable(root .. "/node_modules/.bin/eslint") ~= 1 then
+      return
+    end
+    on_dir(root)
+  end,
+  root_markers = {
+    ".eslintrc",
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.json",
+    "eslint.config.js",
+    "eslint.config.mjs",
+    "eslint.config.cjs",
+    "eslint.config.ts",
+    "eslint.config.mts",
+    "eslint.config.cts",
+  },
+  -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
+  settings = {
+    validate = "on",
+    packageManager = vim.NIL,
+    useESLintClass = false,
+    experimental = {
+      useFlatConfig = true,
+    },
+    codeActionOnSave = {
+      enable = false,
+      mode = "all",
+    },
+    format = true,
+    quiet = false,
+    onIgnoredFiles = "off",
+    rulesCustomizations = {},
+    run = "onType",
+    problems = {
+      shortenToSingleLine = false,
+    },
+    -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
+    -- This path is relative to the workspace folder (root dir) of the server instance.
+    nodePath = "",
+    -- use the workspace folder location or the file location (if no workspace folder is open) as the working directory
+    workingDirectory = { mode = "location" },
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+        location = "separateLine",
+      },
+      showDocumentation = {
+        enable = true,
+      },
+    },
+  },
+}

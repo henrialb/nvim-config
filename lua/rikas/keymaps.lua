@@ -16,6 +16,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- Show all snippets in clipboard for pasting
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Yank to the system clipboard
@@ -28,6 +29,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- Q should do nothing!
 vim.keymap.set("n", "Q", "<nop>")
 
+-- Quickfix and location list navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
@@ -39,23 +41,4 @@ vim.keymap.set(
   "<leader>s",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Change highlighted word" }
-)
-
--- Use Enter to add new lines above and below
-vim.keymap.set("n", "<CR>", "m`o<Esc>``")
-vim.keymap.set("n", "<S-CR>", "m`O<Esc>``")
-
--- Diganostics
-vim.keymap.set(
-  "n",
-  "<leader>cd",
-  "<cmd>lua vim.diagnostic.open_float()<cr>",
-  { desc = "Open diagnostics" }
-)
-vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
-vim.keymap.set(
-  "n",
-  "]d",
-  "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-  { desc = "Previous diagnostic" }
 )

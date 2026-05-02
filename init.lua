@@ -6,13 +6,15 @@ require("h.keymaps")
 require("rikas.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
+    lazyrepo,
     lazypath,
   })
 end
@@ -22,35 +24,55 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   performance = {
     rtp = {
+      -- Disable some builtin vim plugins
       disabled_plugins = {
         "gzip",
         "matchit",
         "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
         "tohtml",
+        "2html_plugin",
+        "getscript",
+        "getscriptPlugin",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "tar",
+        "tarPlugin",
         "tutor",
+        "rrhelper",
+        "vimball",
+        "vimballPlugin",
+        "zip",
         "zipPlugin",
       },
     },
   },
   ui = {
-    -- Accepts same border values as |nvim_open_win|
+    -- Adds a border to Lazy window. Accepts same border values as |nvim_open_win|
     border = "single",
   },
 })
 
 -- Colorscheme
 vim.cmd.colorscheme("catppuccin")
+-- vim.cmd.colorscheme("tokyonight-night")
 
 -- Load misc configurations (not related to any particular package)
+require("h.misc")
 require("rikas.misc")
 
 -- Autocomplete setup
 require("rikas.cmp")
 
 -- Custom highlight groups
-require("rikas.highlights")
+require("h.highlights")
 
+-- LSP configurations
+-- require("rikas.lsp")
+require("core.lsp")
 require("h.lsp")
+
+-- Custom autocommands (e.g. run biome lint on save)
 require("h.autocommands")

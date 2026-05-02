@@ -1,22 +1,23 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
--- Custom highlight groups
-vim.api.nvim_set_hl(
-  0,
-  "CmpItemAbbrDeprecated",
-  { bg = "NONE", strikethrough = true, fg = "#808080" }
-)
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#94e2d6" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpIntemAbbrMatch" })
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { link = "CmpItemKindVariable" })
-vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "CmpItemKindVariable" })
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "CmpItemKindFunction" })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
+-- -- Custom highlight groups
+-- vim.api.nvim_set_hl(
+--   0,
+--   "CmpItemAbbrDeprecated",
+--   { bg = "NONE", strikethrough = true, fg = "#808080" }
+-- )
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#94e2d6" })
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpItemAbbrMatch" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindInterface", { link = "CmpItemKindVariable" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "CmpItemKindVariable" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "CmpItemKindFunction" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -28,11 +29,16 @@ cmp.setup({
       border = "rounded",
       side_padding = 1,
       col_offset = 1,
+      scrollbar = false,
+    },
+    documentation = {
+      border = "rounded",
+      side_padding = 1,
     },
   },
-
   mapping = cmp.mapping.preset.insert({
-    ["<C-Esc>"] = cmp.mapping.close(),
+    ["<C-q>"] = cmp.mapping.close(),
+    ["<C-Esc>"] = cmp.mapping.close(), -- does not work in ghostty :(
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
@@ -71,7 +77,7 @@ cmp.setup({
     ghost_text = true, -- we need this for copilot to work properly!
   },
 
-  formatting = {
-    format = require("lspkind").cmp_format({ mode = "symbol_text" }),
-  },
+  -- formatting = {
+  --   format = require("lspkind").cmp_format({ mode = "symbol_text" }),
+  -- },
 })

@@ -3,6 +3,7 @@ vim.g.netrw_winsize = 25
 
 vim.opt.cursorline = true -- Enable highlighting of the current line
 
+-- Show line numbers and set them to relative
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -12,9 +13,10 @@ vim.opt.shiftwidth = 2 -- Size of an indent
 vim.opt.showmode = false -- Do not show mode in the command line since we have lualine
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.list = true -- Show some invisible characters (tabs, etc)
-vim.opt.smartindent = false -- neovim smar indentation
+vim.opt.smartindent = false -- neovim smart indentation
 vim.opt.wrap = false -- do not wrap long lines
 
+vim.opt.autoread = true -- Reload files changed outside of Neovim
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -26,7 +28,6 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 -- If this many ms nothing is typed the swap file will be written to disk
@@ -48,3 +49,9 @@ vim.opt.grepformat = "%f:%l:%c:%m"
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+-- Set default window border of all floating windows
+vim.opt.winborder = "rounded"
+
+-- Set the sign column to always be visible
+vim.opt.signcolumn = "yes"

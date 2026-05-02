@@ -1,5 +1,5 @@
--- Autocommand to run biome lint on save with the `--unsafe` flag. This is needed to sort classes
--- automatically because the Biome useSortedClasses option is considered unsafe.
+-- Autocommand to run biome check on save with the `--unsafe` flag. This handles linting,
+-- import sorting, and class sorting (useSortedClasses is considered unsafe by biome).
 vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     -- Check if the Biome LSP is active for the current buffer
@@ -15,18 +15,29 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
     if biome_lsp_active then
       local file_path = vim.fn.expand("%:p") -- Get the full path of the current file
+      local runner = "pnpx"
 
-      vim.fn.system({ "bunx", "@biomejs/biome", "lint", file_path, "--unsafe" })
-      local exit_code = vim.v.shell_error -- Get the exit code of the last command
+      -- Detect package manager by lockfile
+      -- local project_root = vim.fn.fnamemodify(file_path, ":h")
+      -- if vim.fn.findfile("bun.lock", project_root .. ";") ~= "" then
+      --   runner = "bunx"
+      -- end
 
-      -- Check if there were any errors
-      if exit_code == 0 then
-        -- If no errors, run the format command
-        vim.fn.system({ "bunx", "@biomejs/biome", "lint", file_path, "--write", "--unsafe" })
+      -- Run from the biome project root to avoid CWD being treated as an implicit root by Biome
+      local biome_client = vim.lsp.get_clients({ name = "biome", bufnr = vim.fn.bufnr() })[1]
+      local project_root = biome_client.root_dir
 
-        -- Reload the buffer to reflect changes made by the command
-        vim.cmd("edit")
-      end
+      vim.fn.jobstart(
+        { runner, "@biomejs/biome", "check", file_path, "--write", "--unsafe" },
+        {
+          cwd = project_root,
+          on_exit = function()
+            vim.schedule(function()
+              vim.cmd("checktime")
+            end)
+          end,
+        }
+      )
     end
   end,
 })

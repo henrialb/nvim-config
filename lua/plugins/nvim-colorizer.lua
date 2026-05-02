@@ -1,5 +1,5 @@
 return { -- Colorize color strings like "#ff5511" or "blue"
-  "NvChad/nvim-colorizer.lua",
+  "catgoose/nvim-colorizer.lua",
   opts = {
     filetypes = {
       "html",
@@ -8,6 +8,7 @@ return { -- Colorize color strings like "#ff5511" or "blue"
       "javascriptreact",
       "typescript",
       "typescriptreact",
+      lua = { mode = "virtualtext" },
       scss = { mode = "virtualtext" },
       css = { mode = "virtualtext" },
     },
@@ -29,6 +30,7 @@ return { -- Colorize color strings like "#ff5511" or "blue"
       -- parsers can contain values used in |user_default_options|
       sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
       virtualtext = "■",
+      virtualtext_inline = "before",
       -- update color values even if buffer is not focused
       -- example use: cmp_menu, cmp_docs
       always_update = false,
