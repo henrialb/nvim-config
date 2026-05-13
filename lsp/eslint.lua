@@ -61,7 +61,7 @@ return {
     packageManager = vim.NIL,
     useESLintClass = false,
     experimental = {
-      useFlatConfig = true,
+      useFlatConfig = false,
     },
     codeActionOnSave = {
       enable = false,

@@ -1,8 +1,4 @@
 return {
-  { -- Use treesitter to autoclose and autorename html tag
-    "windwp/nvim-ts-autotag",
-  },
-
   { -- Smarter comments using treesitter
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = true,
@@ -12,13 +8,14 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
       -- "nvim-treesitter/nvim-treesitter-context", -- Conflicts with dropbar
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         modules = {},
         ensure_installed = {
           "ruby",
@@ -29,6 +26,7 @@ return {
           "regex",
           "bash",
           "markdown",
+          "markdown_inline",
           "luadoc",
           "toml",
           "yaml",
@@ -86,40 +84,40 @@ return {
               ["at"] = "@comment.outer",
             },
           },
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = { query = "@class.outer", desc = "Next class start" },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = { query = "@class.outer", desc = "Next class start" },
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[]"] = "@class.outer",
+            },
+            goto_next = {
+              ["]i"] = "@conditional.inner",
+            },
+            goto_previous = {
+              ["[i"] = "@conditional.inner",
+            },
           },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[["] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = "@class.outer",
-          },
-          goto_next = {
-            ["]i"] = "@conditional.inner",
-          },
-          goto_previous = {
-            ["[i"] = "@conditional.inner",
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>a"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>A"] = "@parameter.inner",
+          swap = {
+            enable = true,
+            swap_next = {
+              ["<leader>a"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["<leader>A"] = "@parameter.inner",
+            },
           },
         },
       })
