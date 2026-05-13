@@ -21,13 +21,6 @@ return {
     scroll = { enabled = false },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    -- TODO: re-enable when Neovim fixes the vim.range bug (nvim 0.12.2)
-    indent = {
-      enabled = false,
-      animate = { enabled = false },
-    },
-    -- TODO: re-enable when Neovim fixes the vim.range bug (nvim 0.12.2)
-    scope = { enabled = false },
     scratch = {
       enabled = true,
       ft = function()

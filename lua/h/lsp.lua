@@ -1,6 +1,3 @@
--- TODO: remove when Neovim fixes the vim.range bug (nvim 0.12.1)
-vim.lsp.handlers["textDocument/documentColor"] = function() end
-
 -- This is where you enable features that only work if there is a language server active in the
 -- file
 vim.api.nvim_create_autocmd("LspAttach", {

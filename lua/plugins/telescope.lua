@@ -21,10 +21,6 @@ return {
               ["C-q"] = actions.smart_send_to_qflist + actions.open_qflist,
             },
           },
-          -- TODO: remove when Neovim fixes the Treesitter highlighter bug (nvim 0.12.1)
-          preview = {
-            treesitter = false,
-          },
           cache_picker = {
             num_pickers = 100,
             ignore_empty_prompt = true,

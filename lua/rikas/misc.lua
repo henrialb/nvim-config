@@ -13,14 +13,6 @@ vim.cmd([[autocmd FileType * set formatoptions-=cro]])
 --   end,
 -- })
 
--- TODO: remove when Neovim fixes the vim.range bug (nvim 0.12.2)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = function()
-    vim.treesitter.stop()
-  end,
-})
-
 -- Cool fold stuff
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
